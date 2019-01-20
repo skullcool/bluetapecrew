@@ -6,10 +6,38 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\jquery-3.2.1.intellisense.js" />
+    <Content Remove="wwwroot\jquery.validate-vsdoc.js" />
+    <Content Remove="wwwroot\_references.js" />
+  </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\templates\email-subscribe.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\templates\header-menu.html" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="MailChimp.NET" Version="1.1.92" />
+    <PackageReference Include="MailKit" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="PayPal" Version="1.9.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="wwwroot\Content\fontawesome\" />
+    <Folder Include="wwwroot\Content\webfonts\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\jquery-3.2.1.intellisense.js" />
+    <None Include="wwwroot\jquery.validate-vsdoc.js" />
+    <None Include="wwwroot\_references.js" />
   </ItemGroup>
 
 </Project>
