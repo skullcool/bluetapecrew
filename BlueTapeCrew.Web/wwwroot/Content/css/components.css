@@ -5211,7 +5211,7 @@ Social Icons
   background: url(../Content/img/social/evernote.png) no-repeat;
 }
 .social-icons li .facebook {
-  background: url(../Content/img/social/facebook.png) no-repeat;
+  background: url(../img/social/facebook.png) no-repeat;
 }
 .social-icons li .forrst {
   background: url(../Content/img/social/forrst.png) no-repeat;
@@ -5229,7 +5229,7 @@ Social Icons
   background: url(../Content/img/social/last-fm.png) no-repeat;
 }
 .social-icons li .linkedin {
-  background: url(../Content/img/social/linkedin.png) no-repeat;
+  background: url(../img/social/linkedin.png) no-repeat;
 }
 .social-icons li .picasa {
   background: url(../Content/img/social/picasa.png) no-repeat;
@@ -5253,7 +5253,7 @@ Social Icons
   background: url(../Content/img/social/tumblr.png) no-repeat;
 }
 .social-icons li .twitter {
-  background: url(../Content/img/social/twitter.png) no-repeat;
+  background: url(../img/social/twitter.png) no-repeat;
 }
 .social-icons li .vimeo {
   background: url(../Content/img/social/vimeo.png) no-repeat;
@@ -5399,7 +5399,7 @@ Inline Social Icons
   background: url(../Content/img/social/tumblr.png) no-repeat;
 }
 .social-icon.twitter {
-  background: url(../Content/img/social/twitter.png) no-repeat;
+  background: url(../img/social/twitter.png) no-repeat;
 }
 .social-icon.vimeo {
   background: url(../Content/img/social/vimeo.png) no-repeat;
