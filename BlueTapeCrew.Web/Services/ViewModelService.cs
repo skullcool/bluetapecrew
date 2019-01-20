@@ -29,6 +29,7 @@ namespace BlueTapeCrew.Web.Services
             var catalog = new List<CatalogModel>();
 
             var categories = await _categoryRepository.Get(includeStyles: true);
+            if(categories == null || !categories.Any()) throw new ConfigurationNotFoundException("No site categories found");
 
             foreach (var category in categories.OrderByDescending(x => x.ProductCategories.Select(p => p.Product).Count()))
             {
@@ -75,7 +76,7 @@ namespace BlueTapeCrew.Web.Services
         public async Task<LayoutViewModel> GetLayoutViewModel()
         {
             var settings = await _db.SiteSettings.FirstOrDefaultAsync();
-            if(settings == null) throw  new ConfigurationNotFoundException();
+            if(settings == null) throw  new ConfigurationNotFoundException("No Site Settings Found");
             return new LayoutViewModel
             {
                 ContactEmail = settings.ContactEmailAddress,

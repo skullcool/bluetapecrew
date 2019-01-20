@@ -812,16 +812,16 @@ body.page-header-fixed {
 	text-indent: -100000px;
 }
 .owl-buttons .owl-prev {
-    background: #fff url(../Content/img/fa-angles.png) no-repeat 8px 8px;
+    background: #fff url(../img/fa-angles.png) no-repeat 8px 8px;
 }
 .owl-buttons .owl-next {
-    background: #fff url(../Content/img/fa-angles.png) no-repeat -33px 8px;
+    background: #fff url(../img/fa-angles.png) no-repeat -33px 8px;
 }
 .owl-buttons .owl-prev:hover {
-    background: #e84d1c url(../Content/img/fa-angles.png) no-repeat 8px -31px;
+    background: #e84d1c url(../img/fa-angles.png) no-repeat 8px -31px;
 }
 .owl-buttons .owl-next:hover {
-    background: #e84d1c url(../Content/img/fa-angles.png) no-repeat -33px -31px;
+    background: #e84d1c url(../img/fa-angles.png) no-repeat -33px -31px;
 }
 
 /*  */
@@ -2254,16 +2254,16 @@ Demo Utils
 }
 .testimonials-v1 .left-btn {
 	right: 30px;
-    background: url(Content/img/fa-angles.png) no-repeat 8px 8px;
+    background: url(../img/fa-angles.png) no-repeat 8px 8px;
 }
 .testimonials-v1 .right-btn {
-    background: url(Content/img/fa-angles.png) no-repeat -33px 8px;
+    background: url(../img/fa-angles.png) no-repeat -33px 8px;
 }
 .testimonials-v1 .left-btn:hover {
-    background: #e84d1c url(Content/img/fa-angles.png) no-repeat 8px -31px;
+    background: #e84d1c url(../img/fa-angles.png) no-repeat 8px -31px;
 }
 .testimonials-v1 .right-btn:hover {
-    background: #e84d1c url(Content/img/fa-angles.png) no-repeat -33px -31px;
+    background: #e84d1c url(../img/fa-angles.png) no-repeat -33px -31px;
 }
 
 /* our clients */
