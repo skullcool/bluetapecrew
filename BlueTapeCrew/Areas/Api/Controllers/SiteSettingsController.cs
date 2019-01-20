@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using BlueTapeCrew.Contracts.Services;
-using BlueTapeCrew.Models;
 using BlueTapeCrew.Models.Entities;
 
 namespace BlueTapeCrew.Areas.Api.Controllers
