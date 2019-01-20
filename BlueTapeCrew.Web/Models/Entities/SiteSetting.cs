@@ -72,6 +72,8 @@ namespace BlueTapeCrew.Web.Models.Entities
         public string PaypalClientSecret { get; set; }
         [StringLength(100)]
         public string PaypalClientId { get; set; }
+        [StringLength(100)]
+        public string PaypalEndpointUrl { get; set; }
 
         // Paypal Sandbox
         public string PaypalSandboxAccount { get; set; }

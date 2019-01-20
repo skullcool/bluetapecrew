@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlueTapeCrew.Web.Exceptions;
 
 namespace BlueTapeCrew.Web.Services
 {
@@ -74,6 +75,7 @@ namespace BlueTapeCrew.Web.Services
         public async Task<LayoutViewModel> GetLayoutViewModel()
         {
             var settings = await _db.SiteSettings.FirstOrDefaultAsync();
+            if(settings == null) throw  new ConfigurationNotFoundException();
             return new LayoutViewModel
             {
                 ContactEmail = settings.ContactEmailAddress,
