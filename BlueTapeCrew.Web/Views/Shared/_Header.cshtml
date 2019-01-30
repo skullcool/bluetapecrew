@@ -1,0 +1,39 @@
+@using BlueTapeCrew.Web.ViewModels
+@model LayoutViewModel
+
+<div class="header">
+  <div class="pre-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 additional-shop-info">
+          <ul class="list-unstyled list-inline">
+            <li><i class="fa fa-phone"></i><span>@Model.ContactPhone</span></li>
+            <li><i class="fa fa-envelope"></i><a href="mailto:@Model.ContactEmail">@Model.ContactEmail</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-sm-6 additional-nav">
+            <ul class="list-unstyled list-inline pull-right">
+              <li>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Account</a>
+              </li>
+              <li>
+                <a class="nav-link text-dark" asp-page="/Cart/Index">Shopping Cart</a>
+              </li>
+              <partial name="_LoginPartial" />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a class="site-logo" href="@Url.Action("Index", "Home")"><img src="~/content/logo.png" alt="@Model.SiteTitle"></a>
+      <div class="top-cart-block">
+        <div class="top-cart-info">
+          <a href="javascript:void(0);" class="top-cart-info-count">@ViewBag.CartCount items</a>
+          <a href="javascript:void(0);" class="top-cart-info-value">$@ViewBag.CartTotal</a>
+        </div>
+        <a href="javascript:;"><i class="fa fa-shopping-cart"></i></a>
+      </div>
+      <header-menu></header-menu>
+    </div>
+  </div>

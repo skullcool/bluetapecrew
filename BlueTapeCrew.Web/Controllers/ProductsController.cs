@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using BlueTapeCrew.Web.Models;
 using BlueTapeCrew.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,14 +24,20 @@ namespace BlueTapeCrew.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(string id)
         {
-            if (id.ToLower().Equals("details")) return RedirectToAction("Index", "Home");
-            if (string.IsNullOrEmpty(id)) return RedirectToAction("Index", "Home");
-            var productViewModel = await _productService.GetProductViewModel(id);
-            if (productViewModel == null) return RedirectToAction("Index", "Home");
-            //_sessionService.SetProduct(productViewModel.Id);
-            //_sessionService.SetCategory(id);
-            ViewBag.ReturnUrl = HttpContext.Request.Host.ToString();
-            return View(productViewModel);
+            try
+            {
+                if (string.IsNullOrEmpty(id)) return RedirectToAction("Index", "Home");
+                var productViewModel = await _productService.GetProductViewModel(id);
+                if (productViewModel == null) return RedirectToAction("Index", "Home");
+                //_sessionService.SetProduct(productViewModel.Id);
+                //_sessionService.SetCategory(id);
+                ViewBag.ReturnUrl = HttpContext.Request.Host.ToString();
+                return View(productViewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel(ex));
+            }
         }
 
         [ValidateAntiForgeryToken]

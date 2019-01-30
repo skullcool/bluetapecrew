@@ -2,24 +2,24 @@
 
     .directive("headerMenu", function ($resource) {
 
-        var api = $resource("/api/menu");
+        var api = $resource("../api/menu");
         return {
             scope: {},
-            templateUrl: "templates/header-menu.html",
+            templateUrl: "../templates/header-menu.html",
             replace: true,
-            link: function (scope) {
+            link: function(scope) {
                 scope.vm = {};
-                api.query(function(data) {
+                api.query(function (data) {
                     scope.vm.catagories = data;
                 });
             }
-        }
+        };
     })
 
     .directive("emailSubscribe", function ($resource) {
         return {
             scope: {},
-            templateUrl: "templates/email-subscribe.html",
+            templateUrl: "../templates/email-subscribe.html",
             link: function (scope) {
 
                 scope.vm = {};

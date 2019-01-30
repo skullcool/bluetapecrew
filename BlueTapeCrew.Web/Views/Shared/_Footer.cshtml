@@ -1,0 +1,69 @@
+@model BlueTapeCrew.Web.ViewModels.LayoutViewModel
+
+<div class="pre-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 pre-footer-col">
+        <h2>About us</h2>
+        <p>@Model.AboutUs</p>
+      </div>
+      <div class="col-md-3 col-sm-6 pre-footer-col">
+        <h2>Contact Us</h2>
+        <address class="margin-bottom-40">
+          Email: <a href="@Model.ContactEmail">@Model.ContactEmail</a><br>
+        </address>
+      </div>
+      <div class="col-md-3 col-sm-6 pre-footer-col">
+        <h2 class="margin-bottom-0">Latest Tweets</h2>
+        <a 
+          class="twitter-timeline" 
+          data-chrome="noheader nofooter noscrollbar noborders transparent" 
+          data-link-color="#57C8EB" 
+          data-theme="dark" 
+          data-tweet-limit="2" 
+          data-widget-id="@Model.TwitterWidgetId" 
+          href="https://twitter.com/twitterapi">Loading tweets by @("@" + Model.TwitterHandle)...</a>
+      </div>
+      <div class="col-md-3 col-sm-6 pre-footer-col">
+        <h2>Custom Shirts</h2>
+        <p>Contact us about custom shirt oders.</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <ul class="social-icons">
+          <li><a class="facebook" data-original-title="facebook" href="@Model.FaceBookUrl"></a></li>
+          <li><a class="twitter" data-original-title="twitter" href="@Model.TwitterUrl"></a></li>
+          <li><a class="linkedin" data-original-title="linkedin" href="@Model.LinkedInUrl"></a></li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="pre-footer-subscribe-box pull-right">
+          <email-subscribe></email-subscribe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 padding-top-10">
+        &copy; @DateTime.Now.Year - @Model.SiteTitle | @Model.CopyrightText <a href="@Model.CopyrightUrl">@Model.CopyrightLinktext</a>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <ul class="list-unstyled list-inline pull-right">
+          <li><img src="~/Content/img/payments/PayPal.jpg" alt="We accept PayPal" title="We accept PayPal"></li>
+          @*<li><img src="~/Content/img/payments/visa.jpg" alt="We accept Visa" title="We accept Visa via PayPal"></li>
+            <li><img src="~/Content/img/payments/MasterCard.jpg" alt="We accept MasterCard" title="We accept MasterCard via PayPal"></li>
+            <li><img src="~/Content/img/payments/american-express.jpg" alt="We accept American Express" title="We accept American Express via PayPal"></li>
+            <li><img src="~/Content/img/payments/discover.png" alt="We accept JCB" title="We accept Discover via PayPal"></li>
+            <li><img src="~/Content/img/payments/JCB.jpg" alt="We accept JCB" title="We accept JCB via PayPal"></li>
+            <li><img src="~/Content/img/payments/dinersclub.png" alt="We accept JCB" title="We accept Diner's Club via PayPal"></li>
+            <li><img src="~/Content/img/payments/enroute.jpg" alt="We accept JCB" title="We accept EnRoute via PayPal"></li>*@
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
