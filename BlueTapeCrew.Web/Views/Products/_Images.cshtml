@@ -1,0 +1,18 @@
+﻿@model BlueTapeCrew.Web.ViewModels.ProductViewModel
+
+<div class="col-md-6 col-sm-6">
+  <div class="product-main-image hidden-xs">
+    <img src="@Model.ImgSource"
+         alt="@Model.Name" class="img-responsive"
+         data-bigimgsrc="@Model.ImgSource">
+  </div>
+  <img class="col-xs-12 hidden-sm hidden-md hidden-lg" src="@Model.ImgSource" />
+  <div class="product-other-images">
+    @foreach (var item in Model.AdditionalImages)
+    {
+      <a href="@item" class="fancybox-button" rel="photos-lib">
+        <img alt="@Model.Name" src="@item">
+      </a>
+    }
+  </div>
+</div>

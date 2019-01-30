@@ -1,0 +1,44 @@
+﻿@model BlueTapeCrew.Web.ViewModels.ProductViewModel
+
+<div class="col-md-6 col-sm-6">
+  <h1>@Html.DisplayFor(x => x.Name)</h1>
+  <div class="price-availability-block clearfix">
+    <div class="price">
+      <strong><span>$</span><span id="price">@Model.Price</span></strong>
+    </div>
+    <div class="availability">
+      Availability: <strong>In Stock</strong>
+    </div>
+  </div>
+  <div class="description">
+    <p>@Html.DisplayFor(x => x.Description)</p>
+  </div>
+  <div class="product-page-options">
+    <div class="pull-left">
+      <label class="control-label">Size / Color:</label>
+      @Html.DropDownList("StyleId", null, new { @class = "form-control input-sm", @id = "StyleId", @onchange = "getPrice($(this).val())" })
+    </div>
+  </div>
+
+  <div class="product-page-cart">
+    <div class="product-quantity">
+      <input id="quantity" type="text" min="1" value="1" readonly class="form-control input-sm">
+    </div>
+    <button class="btn btn-info" type="button" onclick="addItem()">Add to cart</button>
+  </div>
+  <div class="review">
+    <input type="range" value="@Model.AverageReview" step="0.25" id="backing4">
+    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-readonly="true">
+    </div>
+    <span>@Model.Reviews.Count() reviews</span>
+  </div>
+  <ul class="social-icons">
+    <li><a class="facebook" data-original-title="facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://bluetapecrew.com/products/@(Model.LinkName)" title="Share on Facebook"></a></li>
+    <li><a href="https://twitter.com/share" class="twitter" data-url="https://bluetapecrew.com/products/@Model.LinkName" data-text="BlueTapeCrew" data-via="bluetapecrew" data-count="none" title="Share on Twitter">Tweet</a></li>
+    <li>
+      <a class="googleplus" data-orginal-title="googleplus" title="Share on Google" href="https://plus.google.com/share?url=https://bluetapecrew.com/products/@(Model.LinkName)" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+      </a>
+    </li>
+    <li><a class="tumblr" data-original-title="tumblr" href="http://tumblr.com/widgets/share/tool?canonicalUrl=https://bluetapecrew.com/products/@(Model.Id)"></a></li>
+  </ul>
+</div>
