@@ -8,16 +8,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlueTapeCrew.Web.Repositories.Interfaces;
 
 namespace BlueTapeCrew.Web.Services
 {
     public class ProductService : IProductService, IDisposable
     {
+        private readonly IProductRepository _productRepository;
         private readonly ApplicationDbContext _db;
 
-        public ProductService(ApplicationDbContext db)
+        public ProductService(ApplicationDbContext db, IProductRepository productRepository)
         {
             _db = db;
+            _productRepository = productRepository;
         }
 
         private static string GetImgSrc(byte[] imageData, string mimeType)
@@ -27,29 +30,20 @@ namespace BlueTapeCrew.Web.Services
 
         private static string GetMoney(decimal m)
         {
-            return m == null ? "0.00" : $"{m:n2}";
+            return $"{m:n2}";
         }
 
         public async Task<ProductViewModel> GetProductViewModel(string name)
         {
-            var product = await _db.Products
-                .Include(x => x.Styles)
-                    .ThenInclude(x => x.Size)
-                .Include(x => x.Styles)
-                    .ThenInclude(x => x.Color)
-                .Include(x => x.Image)
-                .Include(x => x.ProductCategories)
-                    .ThenInclude(x => x.Category)
-                .Include(x => x.ProductImages)
-                    .ThenInclude(x => x.Image)
-                .FirstOrDefaultAsync(x => x.LinkName.Equals(name));
-
+            var product = await _productRepository.GetBy(name);
             if (product == null) return null;
 
             var category = product.ProductCategories.FirstOrDefault()?.Category;
-            var styles = product.Styles.OrderBy(x => x.Size.SizeOrder).ThenBy(x => x.Color.ColorText).ToList();
-            var styleViews = await _db.StyleViews.Where(x => x.ProductId == product.Id).ToListAsync();
-            styleViews = styleViews.OrderBy(x => x.SizeOrder).ThenBy(x => x.ColorText).ToList();
+            var styles = product.Styles
+                                .OrderBy(x => x.Size.SizeOrder)
+                                .ThenBy(x => x.Color.ColorText)
+                                .Select(x => new StyleViewModel(x))
+                                .ToList();
 
             var additionalImages = product.ProductImages.Select(x => x.Image).ToList().Select(
                     image => GetImgSrc(image.ImageData, image.MimeType))
@@ -100,15 +94,9 @@ namespace BlueTapeCrew.Web.Services
                 Name = product.ProductName,
                 Price = GetMoney(styles.FirstOrDefault()?.Price ?? 0.0m),
                 Reviews = reviews,
-                StyleId = new SelectList(styleViews, "Id", "StyleText", styleViews.FirstOrDefault())
+                StyleId = new SelectList(styles, "Id", "StyleText", styles.FirstOrDefault())
             };
-
-
-            if (category != null)
-            {
-                model.Category = category.CategoryName;
-            }
-
+            if (category != null) model.Category = category.CategoryName;
             return model;
         }
 

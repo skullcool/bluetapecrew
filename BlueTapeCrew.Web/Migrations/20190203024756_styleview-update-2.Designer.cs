@@ -4,14 +4,16 @@ using BlueTapeCrew.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueTapeCrew.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190203024756_styleview-update-2")]
+    partial class styleviewupdate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -759,6 +761,7 @@ namespace BlueTapeCrew.Web.Migrations
                     b.Property<int>("ColorId");
 
                     b.Property<string>("ColorText")
+                        .IsRequired()
                         .HasMaxLength(25);
 
                     b.Property<decimal>("Price")
@@ -771,12 +774,16 @@ namespace BlueTapeCrew.Web.Migrations
                     b.Property<int>("SizeOrder");
 
                     b.Property<string>("SizeText")
+                        .IsRequired()
                         .HasMaxLength(20);
 
                     b.Property<string>("StyleText")
+                        .IsRequired()
                         .HasMaxLength(48);
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Id", "ProductId", "SizeId", "SizeOrder", "SizeText", "ColorId", "ColorText", "Price", "StyleText");
 
                     b.ToTable("StyleViews");
                 });

@@ -33,7 +33,6 @@ namespace BlueTapeCrew.Web.Data
         public virtual DbSet<SiteSetting> SiteSettings { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
-        public virtual DbSet<StyleView> StyleViews { get; set; }
 
         // joins
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
@@ -53,11 +52,6 @@ namespace BlueTapeCrew.Web.Data
                 x.ColorText,
                 x.StyleText });
             builder.Entity<PageOpenGraphTag>().HasKey(x => new { x.PageId, x.OpenGraphTagId });
-            builder.Entity<StyleView>().HasKey(x => new
-            {
-                x.Id, x.ProductId, x.SizeId, x.SizeOrder, x.SizeText, x.ColorId, x.ColorText, x.Price, x.StyleText
-            });
-
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
             builder.Entity<ProductImage>().HasKey(x => new { x.ImageId, x.ProductId });
             builder.Entity<Product>().HasMany(e => e.Styles);
@@ -196,10 +190,6 @@ namespace BlueTapeCrew.Web.Data
 
             //modelBuilder.Entity<CartView>()
             //    .Property(e => e.SubTotal)
-            //    .HasPrecision(10, 4);
-
-            //modelBuilder.Entity<StyleView>()
-            //    .Property(e => e.Price)
             //    .HasPrecision(10, 4);
         }
     }

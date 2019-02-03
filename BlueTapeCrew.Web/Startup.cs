@@ -1,6 +1,5 @@
 ﻿using System;
 using BlueTapeCrew.Web.Data;
-using BlueTapeCrew.Web.Models;
 using BlueTapeCrew.Web.Repositories;
 using BlueTapeCrew.Web.Repositories.Interfaces;
 using BlueTapeCrew.Web.Services;
@@ -80,6 +79,7 @@ namespace BlueTapeCrew.Web
             servies.AddTransient<IGuestUserRepository, GuestUserRepository>();
             servies.AddTransient<IInvoiceRepository, InvoiceRepository>();
             servies.AddTransient<ISiteSettingsRepository, SiteSettingsRepository>();
+            servies.AddTransient<IProductRepository, ProductRepository>();
         }
 
         private static void RegisterServiceTypes(IServiceCollection servies)
