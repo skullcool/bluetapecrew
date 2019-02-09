@@ -50,7 +50,6 @@ namespace BlueTapeCrew.Web.Controllers
             _paypalService = paypalService;
             _siteSettingsService = siteSettingsService;
             _emailService = emailService;
-            _userManager = userManager;
 #if DEBUG
             _isSandbox = true;
 #endif
