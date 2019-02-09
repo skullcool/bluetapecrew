@@ -16,22 +16,9 @@ namespace BlueTapeCrew.Web.Repositories
             _db = db;
         }
 
-        public async Task CreateGuestUser(string sessionId, string firstName, string lastName, string address, string city, string state,
-            string zip, string phone, string email)
+        public async Task CreateGuestUser(GuestUser user)
         {
-            var dbUser = new GuestUser
-            {
-                SessionId = sessionId,
-                FirstName = firstName,
-                LastName = lastName,
-                Address = address,
-                City = city,
-                State = state,
-                PostalCode = zip,
-                PhoneNumber = phone,
-                Email = email,
-            };
-            _db.GuestUsers.Add(dbUser);
+            _db.GuestUsers.Add(user);
             await _db.SaveChangesAsync();
         }
 

@@ -38,7 +38,7 @@ namespace BlueTapeCrew.Web.Controllers
             ISiteSettingsService siteSettingsService,
             IInvoiceService invoiceService, IHttpContextAccessor context,
             //UserManager<ApplicationUser> userManager, 
-            ISessionService sessionService, 
+            ISessionService sessionService,
             IGuestUserRepository guestUserRepository)
         {
             _cartService = cartService;
@@ -74,44 +74,60 @@ namespace BlueTapeCrew.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(CheckoutViewModel model, string itemamt, string shipping, string amt)
         {
-            var cartId = _sessionService.GetId();
-            if (ModelState.IsValid)
+            try
             {
-                if (User.Identity.IsAuthenticated)
+                string cartId = string.Empty;
+                if (ModelState.IsValid)
                 {
-                    //var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                    //user.Update(model);
-                    //await _userManager.UpdateAsync(user);
-                }
-                else
-                {
-                    await
-                        _guestUserRepository.CreateGuestUser(cartId, model.FirstName, model.LastName, model.Address,
-                            model.City, model.State, model.Zip, model.Phone, model.Email);
-                }
+                    cartId = _sessionService.GetId();
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        //var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                        //user.Update(model);
+                        //await _userManager.UpdateAsync(user);
+                    }
+                    else
+                    {
+                        var guestUser = new GuestUser
+                        {
+                            SessionId = cartId.Replace("-", ""),
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Address = model.Address,
+                            City = model.City,
+                            State = model.State,
+                            PostalCode = model.Zip,
+                            PhoneNumber = model.Phone,
+                            Email = model.Email,
+                        };
+                        
+                        await
+                            _guestUserRepository.CreateGuestUser(guestUser);
+                    }
 
-                var settings = await _siteSettingsService.Get();
-                var cart = await _cartService.GetCartViewModel(cartId);
+                    var settings = await _siteSettingsService.Get();
+                    var cart = await _cartService.GetCartViewModel(cartId);
 
-                //todo: impliment token store and get token if not expired
-                var accessToken = string.Empty;
-                var invoice = await _invoiceService.Create(cartId);
+                    //todo: impliment token store and get token if not expired
+                    var accessToken = string.Empty;
+                    var invoice = await _invoiceService.Create(cartId);
 
-                try
-                {
+
                     var uri = new Uri(HttpContext.Request.GetDisplayUrl());
                     var paymentRequest = new PaymentRequest(uri, settings, cart.Items.ToList(), invoice.Id, accessToken, _isSandbox);
                     var redirectUrl = await _paypalService.PaywithPaypal(paymentRequest);
                     if (!string.IsNullOrEmpty(redirectUrl)) Response.Redirect(redirectUrl);
+
                 }
-                catch (PaymentsException ex)
-                {
-                    return Content(ex.Response);
-                }
+                ViewBag.Errors = true;
+                model.Cart = await _cartService.GetCartViewModel(cartId);
+                return View(model);
+
             }
-            ViewBag.Errors = true;
-            model.Cart = await _cartService.GetCartViewModel(cartId);
-            return View(model);
+            catch (PaymentsException ex)
+            {
+                return Content(ex.Response);
+            }
         }
 
         public ViewResult EmptyCart()
