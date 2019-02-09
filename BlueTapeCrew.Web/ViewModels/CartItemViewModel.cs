@@ -22,7 +22,7 @@ namespace BlueTapeCrew.Web.ViewModels
         public int StyleId => _cartItem.Style.Id;
         public string ColorText => _cartItem.Style.Color.ColorText;
         public string Description => _cartItem.Style.Product.Description;
-        public string StyleText => _cartItem.Style.Product.Description;
+        public string StyleText => $"Color: {ColorText}; Size: {_cartItem.Style.Size.SizeText}"; //_cartItem.Style.Product.Description;
         public decimal? SubTotal => _cartItem.Style.Price * _cartItem.Count;
         public byte[] ImageData => _cartItem.Style.Product.CartImages.FirstOrDefault()?.ImageData;
     }
