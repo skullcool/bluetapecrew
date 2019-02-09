@@ -1,3 +1,4 @@
+using System.Linq;
 using BlueTapeCrew.Web.Models.Entities;
 
 namespace BlueTapeCrew.Web.ViewModels
@@ -23,6 +24,6 @@ namespace BlueTapeCrew.Web.ViewModels
         public string Description => _cartItem.Style.Product.Description;
         public string StyleText => _cartItem.Style.Product.Description;
         public decimal? SubTotal => _cartItem.Style.Price * _cartItem.Count;
-        public byte[] ImageData => _cartItem.Style.Product.Image?.ImageData;
+        public byte[] ImageData => _cartItem.Style.Product.CartImages.FirstOrDefault()?.ImageData;
     }
 }

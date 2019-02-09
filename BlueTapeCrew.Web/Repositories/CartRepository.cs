@@ -28,6 +28,7 @@ namespace BlueTapeCrew.Web.Repositories
                                 .ThenInclude(x => x.Color)
                             .Include(x => x.Style)
                                 .ThenInclude(x => x.Product)
+                                .ThenInclude(x=>x.CartImages)
                             .OrderByDescending(x => x.Id)
                             .ToListAsync();
         }
