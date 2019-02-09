@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BlueTapeCrew.Web
 {
@@ -68,21 +69,23 @@ namespace BlueTapeCrew.Web
             servies.AddTransient<ICartRepository, CartRepository>();
         }
 
-        private static void RegisterServiceTypes(IServiceCollection servies)
+        private static void RegisterServiceTypes(IServiceCollection services)
         {
-            servies.AddTransient<ICartService, CartService>();
-            servies.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IEmailService, EmailService>();
             //servies.AddTransient<IEmailSender, EmailSender>();
             //servies.AddTransient<IEmailSubscriptionService, EmailSubscriptionService>();
-            servies.AddTransient<IImageService, ImageService>();
-            servies.AddTransient<IInvoiceService, InvoiceService>();
-            servies.AddTransient<IMenuService, MenuService>();
-            servies.AddTransient<IOrderService, OrderService>();
-            servies.AddTransient<IPaypalService, PaypalService>();
-            servies.AddTransient<IProductService, ProductService>();
-            servies.AddTransient<ISessionService, SessionService>();
-            servies.AddTransient<ISiteSettingsService, SiteSettingsService>();
-            servies.AddTransient<IViewModelService, ViewModelService>();
+            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
+            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IPaypalService, PaypalService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ISessionService, SessionService>();
+            services.AddTransient<ISiteSettingsService, SiteSettingsService>();
+            services.AddTransient<IViewModelService, ViewModelService>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
