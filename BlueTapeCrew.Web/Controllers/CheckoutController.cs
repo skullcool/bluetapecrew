@@ -28,7 +28,7 @@ namespace BlueTapeCrew.Web.Controllers
         private readonly IEmailService _emailService;
         private readonly ISessionService _sessionService;
         private readonly IGuestUserRepository _guestUserRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
 
         public CheckoutController(
             ICartService cartService,
@@ -37,14 +37,14 @@ namespace BlueTapeCrew.Web.Controllers
             IPaypalService paypalService,
             ISiteSettingsService siteSettingsService,
             IInvoiceService invoiceService, IHttpContextAccessor context,
-            UserManager<ApplicationUser> userManager, 
+            //UserManager<ApplicationUser> userManager, 
             ISessionService sessionService, 
             IGuestUserRepository guestUserRepository)
         {
             _cartService = cartService;
             _orderService = orderService;
             _invoiceService = invoiceService;
-            _userManager = userManager;
+            //_userManager = userManager;
             _sessionService = sessionService;
             _guestUserRepository = guestUserRepository;
             _paypalService = paypalService;
@@ -60,12 +60,12 @@ namespace BlueTapeCrew.Web.Controllers
         {
             var cart = await _cartService.GetCartViewModel(_sessionService.GetId());
             if (cart == null) return RedirectToAction("EmptyCart");
-            var user = new ApplicationUser();
-            if (!string.IsNullOrEmpty(User.Identity.Name))
-            {
-                user = await _userManager.FindByNameAsync(User.Identity.Name);
-            }
-            var model = new CheckoutViewModel(user, cart, user);
+            //var user = new ApplicationUser();
+            //if (!string.IsNullOrEmpty(User.Identity.Name))
+            //{
+            //    user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //}
+            var model = new CheckoutViewModel(/*user,*/ cart/*, user*/);
             ViewBag.ReturnUrl = HttpContext.Request.GetDisplayUrl();
             return View(model);
         }
@@ -79,9 +79,9 @@ namespace BlueTapeCrew.Web.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                    user.Update(model);
-                    await _userManager.UpdateAsync(user);
+                    //var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    //user.Update(model);
+                    //await _userManager.UpdateAsync(user);
                 }
                 else
                 {
@@ -133,13 +133,13 @@ namespace BlueTapeCrew.Web.Controllers
             var model = new CheckoutViewModel();
             if (User.Identity.IsAuthenticated)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                model.FirstName = user.FirstName;
-                model.LastName = user.LastName;
-                model.Address = user.Address;
-                model.City = user.City;
-                model.State = user.State;
-                model.Zip = user.PostalCode;
+                //var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                //model.FirstName = user.FirstName;
+                //model.LastName = user.LastName;
+                //model.Address = user.Address;
+                //model.City = user.City;
+                //model.State = user.State;
+                //model.Zip = user.PostalCode;
             }
             else
             {
@@ -212,16 +212,16 @@ namespace BlueTapeCrew.Web.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                if (user != null)
-                {
-                    order.FirstName = user.FirstName;
-                    order.LastName = user.LastName;
-                    order.Address = user.Address;
-                    order.City = user.City;
-                    order.State = user.State;
-                    order.Zip = user.PostalCode;
-                }
+                //var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                //if (user != null)
+                //{
+                //    order.FirstName = user.FirstName;
+                //    order.LastName = user.LastName;
+                //    order.Address = user.Address;
+                //    order.City = user.City;
+                //    order.State = user.State;
+                //    order.Zip = user.PostalCode;
+                //}
             }
             else
             {

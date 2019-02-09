@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlueTapeCrew.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options){}
 

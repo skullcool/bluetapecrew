@@ -7,23 +7,23 @@ namespace BlueTapeCrew.Web.ViewModels
     {
         public CheckoutViewModel() { }
 
-        public CheckoutViewModel(ApplicationUser user, CartViewModel cart, ApplicationUser applicationUser)
+        public CheckoutViewModel(/*ApplicationUser user,*/ CartViewModel cart/*, ApplicationUser applicationUser*/)
         {
             Cart = cart;
-            if (user != null)
-            {
-                Address = user.Address;
-                City = user.City;
-                FirstName = user.FirstName;
-                LastName = user.LastName;
-                State = user.State;
-                Zip = user.PostalCode;
-            }
+            //if (user != null)
+            //{
+            //    Address = user.Address;
+            //    City = user.City;
+            //    FirstName = user.FirstName;
+            //    LastName = user.LastName;
+            //    State = user.State;
+            //    Zip = user.PostalCode;
+            //}
 
-            if (applicationUser == null) return;
+            //if (applicationUser == null) return;
 
-            Email = applicationUser.Email;
-            Phone = applicationUser.PhoneNumber;
+            //Email = applicationUser.Email;
+            //Phone = applicationUser.PhoneNumber;
         }
 
         [Required(ErrorMessage = "eMail is required")]

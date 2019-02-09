@@ -1,6 +1,4 @@
-﻿using System;
-using BlueTapeCrew.Web.Data;
-using BlueTapeCrew.Web.Models;
+﻿using BlueTapeCrew.Web.Data;
 using BlueTapeCrew.Web.Repositories;
 using BlueTapeCrew.Web.Repositories.Interfaces;
 using BlueTapeCrew.Web.Services;
@@ -8,13 +6,11 @@ using BlueTapeCrew.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace BlueTapeCrew.Web
 {
@@ -40,15 +36,6 @@ namespace BlueTapeCrew.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddDefaultUI(UIFramework.Bootstrap4)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
 
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -85,7 +72,7 @@ namespace BlueTapeCrew.Web
         {
             servies.AddTransient<ICartService, CartService>();
             servies.AddTransient<IEmailService, EmailService>();
-            servies.AddTransient<IEmailSender, EmailSender>();
+            //servies.AddTransient<IEmailSender, EmailSender>();
             //servies.AddTransient<IEmailSubscriptionService, EmailSubscriptionService>();
             servies.AddTransient<IImageService, ImageService>();
             servies.AddTransient<IInvoiceService, InvoiceService>();
