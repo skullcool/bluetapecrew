@@ -37,7 +37,9 @@ namespace BlueTapeCrew.Web.Controllers
             IPaypalService paypalService,
             ISiteSettingsService siteSettingsService,
             IInvoiceService invoiceService, IHttpContextAccessor context,
-            UserManager<ApplicationUser> userManager, ISessionService sessionService, IGuestUserRepository guestUserRepository)
+            UserManager<ApplicationUser> userManager, 
+            ISessionService sessionService, 
+            IGuestUserRepository guestUserRepository)
         {
             _cartService = cartService;
             _orderService = orderService;
