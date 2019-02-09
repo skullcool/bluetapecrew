@@ -99,7 +99,7 @@ namespace BlueTapeCrew.Web.Controllers
                 try
                 {
                     var uri = new Uri(HttpContext.Request.GetDisplayUrl());
-                    var paymentRequest = new PaymentRequest(uri, settings, cart.Items, invoice.Id, accessToken, _isSandbox);
+                    var paymentRequest = new PaymentRequest(uri, settings, cart.Items.ToList(), invoice.Id, accessToken, _isSandbox);
                     var redirectUrl = await _paypalService.PaywithPaypal(paymentRequest);
                     if (!string.IsNullOrEmpty(redirectUrl)) Response.Redirect(redirectUrl);
                 }

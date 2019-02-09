@@ -42,7 +42,8 @@ namespace BlueTapeCrew.Web.Controllers
         [Route("cart/index")]
         public async Task<PartialViewResult> Index()
         {
-            var model = await _cartService.GetCartViewModel(_sessionService.GetId());
+            var sessionId = _sessionService.GetId();
+            var model = await _cartService.GetCartViewModel(sessionId);
             return PartialView(model);
         }
 
@@ -54,6 +55,7 @@ namespace BlueTapeCrew.Web.Controllers
         }
 
         [HttpDelete]
+        [Route("cart/delete/{id}")]
         public async Task Delete(int id)
         {
             await _cartService.DeleteItem(id);

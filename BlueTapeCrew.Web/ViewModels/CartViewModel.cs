@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BlueTapeCrew.Web.Models.Entities;
 
 namespace BlueTapeCrew.Web.ViewModels
 {
@@ -9,6 +8,6 @@ namespace BlueTapeCrew.Web.ViewModels
         public string Shipping { get; set; }
         public string Total { get; set; }
         public int Count { get; set; }
-        public List<CartView> Items { get; set; }
+        public IEnumerable<CartItemViewModel> Items { get; set; }
     }
 }

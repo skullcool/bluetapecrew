@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BlueTapeCrew.Web.Models.Entities;
+using BlueTapeCrew.Web.ViewModels;
 
 namespace BlueTapeCrew.Web.Models.Paypal
 {
@@ -11,7 +12,7 @@ namespace BlueTapeCrew.Web.Models.Paypal
         private const string SandboxMode = "sandbox";
         private const string LiveMode = "live";
 
-        public PaymentRequest(Uri requestUri, SiteSetting settings, IList<CartView> cart, int invoiceNumber, string accessToken, bool isSandbox = true)
+        public PaymentRequest(Uri requestUri, SiteSetting settings, IList<CartItemViewModel> cart, int invoiceNumber, string accessToken, bool isSandbox = true)
         {
             InitApiCredentialsForMode(settings, isSandbox);
             Init(settings, cart);
@@ -55,7 +56,7 @@ namespace BlueTapeCrew.Web.Models.Paypal
             }
         }
 
-        private void Init(SiteSetting settings, IEnumerable<CartView> cart)
+        private void Init(SiteSetting settings, IEnumerable<CartItemViewModel> cart)
         {
             const decimal tax = 0.00m;
             var subTotal = CalculateSubTotal(cart);
@@ -74,13 +75,13 @@ namespace BlueTapeCrew.Web.Models.Paypal
                         : settings.FlatShippingRate;
         }
 
-        private static decimal CalculateSubTotal(IEnumerable<CartView> cart)
+        private static decimal CalculateSubTotal(IEnumerable<CartItemViewModel> cart)
         {
             var subTotal = cart.Where(item => item.SubTotal != null).Aggregate(0.00m, (current, item) => current + (decimal)item.SubTotal);
             return subTotal;
         }
 
-        private static ItemList GetItemListFrom(IEnumerable<CartView> cart)
+        private static ItemList GetItemListFrom(IEnumerable<CartItemViewModel> cart)
         {
             var itemList = new ItemList
             {

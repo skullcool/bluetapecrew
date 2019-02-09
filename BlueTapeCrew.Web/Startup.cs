@@ -80,6 +80,7 @@ namespace BlueTapeCrew.Web
             servies.AddTransient<IInvoiceRepository, InvoiceRepository>();
             servies.AddTransient<ISiteSettingsRepository, SiteSettingsRepository>();
             servies.AddTransient<IProductRepository, ProductRepository>();
+            servies.AddTransient<ICartRepository, CartRepository>();
         }
 
         private static void RegisterServiceTypes(IServiceCollection servies)

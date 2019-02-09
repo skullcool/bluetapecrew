@@ -14,7 +14,6 @@ namespace BlueTapeCrew.Web.Data
         public virtual DbSet<AzImage> AzImages { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<CartImage> CartImages { get; set; }
-        public virtual DbSet<CartView> CartViews { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryImage> CategoryImages { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
@@ -41,16 +40,6 @@ namespace BlueTapeCrew.Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<CartView>().HasKey(x=>new {
-                x.Id,
-                x.CartId,
-                x.Quantity,
-                x.ProductId,
-                x.ProductName,
-                x.Price,
-                x.StyleId,
-                x.ColorText,
-                x.StyleText });
             builder.Entity<PageOpenGraphTag>().HasKey(x => new { x.PageId, x.OpenGraphTagId });
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
             builder.Entity<ProductImage>().HasKey(x => new { x.ImageId, x.ProductId });

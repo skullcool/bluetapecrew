@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlueTapeCrew.Web.Repositories.Interfaces;
 
 namespace BlueTapeCrew.Web.Services
 {
@@ -15,10 +16,12 @@ namespace BlueTapeCrew.Web.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly ISiteSettingsService _siteSettingsService;
+        private readonly ICartRepository _cartRepository;
 
-        public CartService(ISiteSettingsService siteSettingsService, ApplicationDbContext db)
+        public CartService(ISiteSettingsService siteSettingsService, ApplicationDbContext db, ICartRepository cartRepository)
         {
             _db = db;
+            _cartRepository = cartRepository;
             _siteSettingsService = siteSettingsService;
         }
 
@@ -32,35 +35,28 @@ namespace BlueTapeCrew.Web.Services
             return cartId;
         }
 
-        public async Task<IEnumerable<CartView>> Get(string sessionId)
+        public async Task<IEnumerable<CartItemViewModel>> Get(string sessionId)
         {
-            return await _db.CartViews.Where(x => x.CartId.Equals(sessionId)).OrderByDescending(x => x.Id).ToListAsync();
+            var cartItems = await _cartRepository.GetBy(sessionId);
+            return cartItems.Select(x => new CartItemViewModel(x));
         }
 
         public async Task<CartViewModel> GetCartViewModel(string sessionId)
         {
             var settings = await _siteSettingsService.Get();
-            var cart = await _db.CartViews.Where(x => x.CartId == sessionId).ToListAsync();
-            if (!cart.Any())
-            {
-                return new CartViewModel
-                {
-                    Count = 0
-                };
-            }
-
+            var cartEntities = await _cartRepository.GetBy(sessionId);
+            var cart = cartEntities.Select(x => new CartItemViewModel(x));
+            if (!cart.Any()) return new CartViewModel();
+            
             var subtotal = cart.Sum(x => x.SubTotal);
             decimal shipping = 0;
-            if (subtotal < settings.FreeShippingThreshold)
-            {
-                shipping = settings.FlatShippingRate;
-            }
+            if (subtotal < settings.FreeShippingThreshold) shipping = settings.FlatShippingRate;
             var total = subtotal + shipping;
 
             var model = new CartViewModel
             {
                 Count = cart.Sum(x => x.Quantity),
-                Items = _db.CartViews.Where(x => x.CartId.Equals(sessionId)).OrderBy(x => x.Id).ToList(),
+                Items = cart,
                 SubTotal = $"{subtotal:n2}",
                 Shipping = $"{shipping:n2}",
                 Total = $"{total:n2}"
@@ -96,14 +92,8 @@ namespace BlueTapeCrew.Web.Services
         {
             var temp = await _db.Carts.FindAsync(id);
             if (temp == null) return;
-            if (temp.Count < 2)
-            {
-                _db.Carts.Remove(temp);
-            }
-            else if (temp.Count > 1)
-            {
-                temp.Count--;
-            }
+            if (temp.Count < 2) _db.Carts.Remove(temp);
+            else if (temp.Count > 1) temp.Count--;
             _db.SaveChanges();
         }
 
