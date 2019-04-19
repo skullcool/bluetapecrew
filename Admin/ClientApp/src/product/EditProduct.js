@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import "react-tabs/style/react-tabs.css";
-import ProductStyles from './ProductStyles'
+import EditProductTabs from './EditProductTabs'
 import * as api from '../Api'
-import ProductImages from './ProductImages'
+import ProductImages from './EditProductImages'
 
-export class ProductEditor extends Component {
+export class Edit extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,7 +30,7 @@ export class ProductEditor extends Component {
           <h1>{this.state.product.name}</h1>
           <div className="row">
             <div className="col-md-6">
-              <ProductStyles {...this.state} />
+              <EditProductTabs {...this.state} />
             </div>
             <div className="col-md-6">
               <ProductImages {...this.state} />

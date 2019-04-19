@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { ProductEditor } from './components/ProductEditor';
+import React from 'react'
+import { Route } from 'react-router'
+import Layout from './components/Layout'
+import { Products } from './product/Products'
+import { Edit } from './product/EditProduct'
+import Settings from './settings/Settings'
+import Categories from './categories/Categories'
+import Users from './users/Users'
 
-export default class App extends Component {
-  static displayName = App.name;
+const App = () => 
+  <Layout>
+    <Route exact path='/' component={Products} />
+    <Route exact path='/categories' component={Categories} />
+    <Route exact path='/settings' component={Settings} />
+    <Route exact path='/users' component={Users} />
+    <Route exact path='/product/edit/:id' component={Edit} />
+  </Layout>
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/product/edit/:id' component={ProductEditor} />
-      </Layout>
-    );
-  }
-}
+export default App

@@ -3,8 +3,8 @@ import SendEmailTest from './SendEmailTest'
 import { getSiteSettings, saveSiteSettings } from '../Api'
 
 export default class Settings extends Component {
-    constructor(props) {
-      super(props)
+  constructor(props) {
+    super(props)
 
       this.state = {
         linkName: ""
@@ -29,10 +29,8 @@ export default class Settings extends Component {
       console.log(response)
     }
 
-    label = title => {return(<dt>{title}</dt>)}
-    input = name => {
-      return(<dd><input className="form-control" type="text" name={name} value={this.state[name] || ""} onChange={this.handleInputChange} /></dd>)
-    }
+    label = title => <dt>{title}</dt>
+    input = name => <dd><input className="form-control" type="text" name={name} value={this.state[name] || ""} onChange={this.handleInputChange} /></dd>
     textarea = (name, rows) => {
       if(rows)
         return(<dd><textarea rows={rows} className="form-control" name={name} value={this.state[name] || ""} onChange={this.handleInputChange}></textarea></dd>)
@@ -46,6 +44,7 @@ export default class Settings extends Component {
       const textarea = this.textarea
         return(
 <form>
+  <h1>Settings</h1>
   <div className="row">
     <div className="col-md-6">
       <h2>Site</h2>

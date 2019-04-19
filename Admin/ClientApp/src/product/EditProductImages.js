@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
-import './css/ProductImages.css'
+import './EditProductImages.css'
 
-export default class ProductImages extends Component {
+export default class EditProductImages extends Component {
 render = () =>
 <Tabs className="card card-outline-secondary">
   <TabList className="card-header">

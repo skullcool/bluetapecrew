@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class ColorPanel extends Component {
+export default class EditColors extends Component {
   render = () => 
     <div className="card card-outline-secondary">
       <form onSubmit={this.handleSubmit} className="form">

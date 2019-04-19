@@ -10,11 +10,10 @@ export default class ProductForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount = async() => {
-    this.setState(this.props)
-  }
+  componentDidMount = async() => this.setState(this.props)
+  
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

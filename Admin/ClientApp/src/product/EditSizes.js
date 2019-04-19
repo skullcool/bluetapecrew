@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import TableHead from '../tables/TableHead'
 
-export default class SizePanel extends Component {
+export default class EditSizes extends Component {
   render = () =>
 <div className="col-xs-6">
   <form action="/admin/adminproducts/createsize" method="post">
     <table className="table table-condensed table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Size</th>
-          <th></th>
-        </tr>
-      </thead>
+      <TableHead columns={["Order", "Size", ""]} />
       <tbody>
         <tr>
           <td>1</td>
