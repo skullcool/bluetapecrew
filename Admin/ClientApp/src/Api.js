@@ -12,6 +12,8 @@ export const deleteSytle = async(id) => await remove("productstyles/" + id)
 export const addStyle = async(style) => await post("productstyles", style)
 export const getUsers = async() => await get("users")
 
+export const getStyles = async(id) => await get("styles/" + id)
+
 const get = async(endpoint) => {
     const response =  await fetch(`${baseUrl}/${endpoint}`)
     return await response.json()

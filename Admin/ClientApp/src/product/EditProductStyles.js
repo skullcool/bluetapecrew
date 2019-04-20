@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { addStyle, deleteSytle } from '../Api'
+import { addStyle } from '../Api'
+import { connect } from 'react-redux'
+import { fetchStyles } from '../actions/styleActions'
+import StyleTable from '../styles/StyleTable'
 
 export default class EditProductStyles extends Component {
   constructor(props) {
@@ -13,7 +15,6 @@ export default class EditProductStyles extends Component {
     }
 
     this.inputClass = "form-control form-control-sm"
-    this.trashButton = "btn btn-danger btn-sm float-right"
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);    
   }
@@ -23,11 +24,6 @@ export default class EditProductStyles extends Component {
     this.setState({
       [target.name]: target.value
     });
-  }
-
-  handleTrashClick(id) {
-    deleteSytle(id)
-    window.location.reload()
   }
 
   handleSubmit(event) {
@@ -44,33 +40,8 @@ export default class EditProductStyles extends Component {
   render = () =>
     <div className="card card-outline-secondary">
       <div className="card-body">
-        <form onSubmit={this.handleSubmit} className="form">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Id</th><th>Color</th><th>Size</th><th>Price</th><th></th>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              this.props.styleVm.styles.map(style =>
-                <tr key={style.id}>
-                  <td>{style.id}</td>
-                  <td>{style.colorText}</td>
-                  <td>{style.sizeText}</td>
-                  <td>{style.price}</td>
-                  <td>
-                    <button type="button" 
-                      className={this.trashButton} 
-                      onClick={()=>{this.handleTrashClick(style.id)}} >
-                      <FontAwesomeIcon icon="trash" onClick={e=>e.preventDefault()} />
-                    </button>
-                  </td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
+        <StyleTable productId={this.props.product.id} />
+          <form onSubmit={this.handleSubmit} className="form">
           <div className="form-inline">
             <div className="form-group">
               <select 

@@ -7,6 +7,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux'
+import store from './store'
 
 library.add(fab, faTrash)
 
@@ -15,9 +17,11 @@ const rootElement = document.getElementById('root');
 
 
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter basename={baseUrl}>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   rootElement);
 
 registerServiceWorker();
