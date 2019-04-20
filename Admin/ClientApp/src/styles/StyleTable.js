@@ -1,9 +1,10 @@
+import { connect } from 'react-redux'
+import { deleteSytle } from '../Api'
+import { fetchStyles } from '../actions/styleActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import TableHead from '../tables/TableHead'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { deleteSytle } from '../Api'
-import { connect } from 'react-redux'
-import { fetchStyles } from '../actions/styleActions'
 
 export class StyleTable extends Component {
   handleTrashClick(id) {
@@ -37,6 +38,11 @@ export class StyleTable extends Component {
       }
       </tbody>
     </table>
+}
+
+StyleTable.PropTypes = {
+  fetchStyles: PropTypes.func.isRequired,
+  styles: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
