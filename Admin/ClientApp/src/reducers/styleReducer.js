@@ -1,4 +1,4 @@
-import { FETCH_STYLES, NEW_STYLE } from '../actions/types'
+import { FETCH_STYLES } from '../actions/types'
 
 const intialState = {
   items: [],

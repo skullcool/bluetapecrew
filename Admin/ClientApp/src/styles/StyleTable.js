@@ -40,9 +40,9 @@ export class StyleTable extends Component {
     </table>
 }
 
-StyleTable.PropTypes = {
+StyleTable.propTypes = {
   fetchStyles: PropTypes.func.isRequired,
-  styles: PropTypes.array.isRequired
+  styles: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

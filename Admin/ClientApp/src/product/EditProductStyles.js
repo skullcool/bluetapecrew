@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { addStyle } from '../Api'
-import { connect } from 'react-redux'
-import { fetchStyles } from '../actions/styleActions'
 import StyleTable from '../styles/StyleTable'
 
 export default class EditProductStyles extends Component {
