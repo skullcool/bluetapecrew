@@ -1,18 +1,12 @@
 import { connect } from 'react-redux'
-import { deleteSytle } from '../Api'
-import { fetchStyles } from '../actions/styleActions'
+import { fetchStyles, removeStyle } from '../actions/styleActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import TableHead from '../tables/TableHead'
 
 export class StyleTable extends Component {
-  handleTrashClick(id) {
-    deleteSytle(id)
-  }
-
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchStyles(this.props.productId)
   }
 
@@ -30,7 +24,7 @@ export class StyleTable extends Component {
             <td>
               <button type="button" 
                 className="btn btn-danger btn-sm float-right"
-                onClick={()=>{this.handleTrashClick(style.id)}}
+                onClick={()=>{this.props.removeStyle(style.id)}}
               >
                 <FontAwesomeIcon icon="trash" onClick={e=>e.preventDefault()} />
               </button>
@@ -43,10 +37,11 @@ export class StyleTable extends Component {
 
 StyleTable.propTypes = {
   fetchStyles: PropTypes.func.isRequired,
-  styles: PropTypes.array.isRequired
+  styles: PropTypes.array.isRequired,
+  removeStyle: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   styles: state.styles
 })
-export default connect(mapStateToProps, { fetchStyles })(StyleTable)
+export default connect(mapStateToProps, { removeStyle, fetchStyles })(StyleTable)

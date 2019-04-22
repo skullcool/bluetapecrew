@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "react-tabs/style/react-tabs.css";
-import { deleteSytle } from '../Api'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import ColorPanel from './EditColors'
 import StylePanel from './EditProductStyles';
@@ -13,7 +12,6 @@ export default class EditProductTabs extends Component {
     this.state = {}
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTrashClick = this.handleTrashClick.bind(this);
   }
 
   componentDidMount = async() => this.setState(this.props)
@@ -24,15 +22,6 @@ export default class EditProductTabs extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value});
-  }
-
-  handleTrashClick = async(id) => {
-    if (window.confirm("You sure ?")) { 
-      const response = await deleteSytle(id)
-      if(response.status===200) {
-          window.location.reload()
-      }
-    }
   }
 
   render = () =>

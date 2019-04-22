@@ -1,2 +1,2 @@
 export const FETCH_STYLES = "FETCH_STYLES"
-export const NEW_STYLE = "NEW_STYLE"
+export const DELETE_STYLE = "DELETE_STYLE"
