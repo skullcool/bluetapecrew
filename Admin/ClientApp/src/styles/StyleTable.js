@@ -12,6 +12,7 @@ export class StyleTable extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.props.fetchStyles(this.props.productId)
   }
 
@@ -20,7 +21,7 @@ export class StyleTable extends Component {
       <TableHead columns={["Id","Color","Size","Price",""]} />
       <tbody>
       {
-        this.props.styles.items.map(style =>
+        this.props.styles.map(style =>
           <tr key={style.id}>
             <td>{style.id}</td>
             <td>{style.color}</td>
@@ -42,7 +43,7 @@ export class StyleTable extends Component {
 
 StyleTable.propTypes = {
   fetchStyles: PropTypes.func.isRequired,
-  styles: PropTypes.object.isRequired
+  styles: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
